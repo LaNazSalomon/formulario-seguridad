@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14.3
+    restart: always
+    ports:
+      - "25432:5432"
+    environment:
+      POSTGRES_USER: formuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: form8vo
+    container_name: formulario8vo
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
