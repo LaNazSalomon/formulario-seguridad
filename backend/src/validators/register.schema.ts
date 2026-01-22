@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { Roles } from '../enums/roles.enum.js';
 
 export const registerSchema = z.object({
   nombre: z
@@ -6,6 +7,9 @@ export const registerSchema = z.object({
     .min(2, 'Nombre muy corto')
     .max(100, 'Nombre muy largo')
     .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, 'Nombre inválido'),
+
+  rol: z.enum(Roles, 'Solo user o aDMIN').default(Roles.USER),
+
 
   apellido: z
     .string('El apellido tiene que ser texto')
@@ -32,13 +36,13 @@ export const registerSchema = z.object({
 
   confirmPassword: z.string(),
 
-edad: z
-  .coerce
-  .number('La edad debe ser un numero')
-  .int('La edad debe ser un número entero')
-  .min(13, 'Edad mínima 13')
-  .max(120, 'Edad máxima 120')
-  .optional(),
+  edad: z
+    .coerce
+    .number('La edad debe ser un numero')
+    .int('La edad debe ser un número entero')
+    .min(13, 'Edad mínima 13')
+    .max(120, 'Edad máxima 120')
+    .optional(),
 
 
   telefono: z
